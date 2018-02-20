@@ -16,13 +16,24 @@
         socket.on('newUser', function(userName){
             $('.chat__content').append('<p>Новый пользователь в чате: ' + userName + '</p>');
         });
+
+        socket.on('messageToClients', function(msg, name){
+            $('.chat__content').append('<p>' + name + ': ' + msg + '</p>');
+        });
+
+        $(document).on("click", ".chat__btn", function() {
+            var $input = $(".chat__msg");
+            var msg = $input.val();
+            socket.emit('message', msg);
+            $input.val(null);
+        });
     </script>
 </head>
 <body class="chat">
+    <input class="chat__msg" type="text" name="text" size="20">
+    <button class="chat__btn" type="button" name="button">Отправить</button>
     <div class="chat__content">
 
     </div>
-<input type="text" name="text" size="20">
-<button type="button" name="button">Отправить</button>
 </body>
 </html>

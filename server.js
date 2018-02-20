@@ -17,4 +17,8 @@ io.on('connection', function (socket) {
     let name = 'U' + (socket.id).toString().substr(1,4);
     socket.broadcast.emit('newUser', name);
     socket.emit('userName', name);
+
+    socket.on('message', function(msg){
+        io.sockets.emit('messageToClients', msg, name);
+    });
 });
