@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        var port = 3000;
+        var socket = io.connect('http://localhost:' + port);
+
+        socket.on('userName', function(userName) {
+            $('.chat__content').append('<p>Твой ник: ' + userName + '</p>');
+        });
+
+        socket.on('newUser', function(userName){
+            $('.chat__content').append('<p>Новый пользователь в чате: ' + userName + '</p>');
+        });
+    </script>
+</head>
+<body class="chat">
+    <div class="chat__content">
+
+    </div>
+<input type="text" name="text" size="20">
+<button type="button" name="button">Отправить</button>
+</body>
+</html>
